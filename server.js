@@ -43,6 +43,24 @@ app.get('/api/health-data', async (req, res) => {
   }
 });
 
+app.get('/api/emotions-log', async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('emotions_log')
+      .select('*')
+      .order('id', { ascending: false }) // Get the latest entry first
+      .limit(1); // We only need the most recent one
+
+    if (error) throw error;
+
+    res.status(200).json(data ? data[0] : null);
+
+  } catch (err) {
+    console.error('Error fetching emotion data from Supabase:', err.message);
+    res.status(500).json({ error: 'An error occurred while fetching emotion data.' });
+  }
+});
+
 const startServer = async () => {
   try {
     console.log('Attempting to connect to Supabase...');
