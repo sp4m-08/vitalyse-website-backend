@@ -15,7 +15,7 @@ app.use(express.json());
 const supabaseUrl = process.env.SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_ANON_KEY;
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash"});
+const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash"});
 
 if (!supabaseUrl || !supabaseKey) {
   console.error("Supabase URL and Anon Key are required. Please check your credentials.");
